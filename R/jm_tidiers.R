@@ -2,13 +2,13 @@
 #'
 #'
 #' @export
-tidy.JM <- function(x) {
+tidy_jm <- function(x) {
 
-  lng <- summary(jointFit.aids)[["CoefTable-Long"]] %>%
+  lng <- summary(x)[["CoefTable-Long"]] %>%
     as_tibble(rownames = "term") %>%
     mutate(sub.Model = "Longitudinal")
 
-  evt <- summary(jointFit.aids)[["CoefTable-Event"]] %>%
+  evt <- summary(x)[["CoefTable-Event"]] %>%
     as_tibble(rownames = "term") %>%
     mutate(sub.Model = "Event")
 
@@ -19,7 +19,7 @@ tidy.JM <- function(x) {
 #'
 #'
 #' @export
-augment.JM <- function(x, data = NULL, ...) {
+augment_jm <- function(x, data = NULL, ...) {
 
   if (is.null(data))
     data <- x$data
@@ -32,10 +32,10 @@ augment.JM <- function(x, data = NULL, ...) {
 #' Glance JM
 #'
 #' @export
-glance.jointModel <- function(x) {
+glance_jm <- function(x) {
   tibble(
     logLik = logLik(x)[1],
-    AIC = AIC(jointFit.aids),
-    BIC = BIC(jointFit.aids)
+    AIC = AIC(x),
+    BIC = BIC(x)
   )
 }
